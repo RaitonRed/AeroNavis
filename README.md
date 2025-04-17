@@ -19,8 +19,10 @@
 ```
 AeroNavis/ 
 ├── ai/  
+|   └── model.py
 ├── simulator/
 ├── utils/
+|   └── generate_data.py
 ├── data/
 ├── models/
 ├── configs/
