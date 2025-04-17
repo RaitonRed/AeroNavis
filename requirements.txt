@@ -4,3 +4,4 @@ numpy<2
 jupyter
 notebook
 keras
+pandas
