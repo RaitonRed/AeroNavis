@@ -42,7 +42,8 @@ AeroNavis/
 ```bash
 git clone https://github.com/RaitonRed/AeroNavis.git
 cd AeroNavis
-py -3.10 -m venv ,env
+py -3.10 -m venv .env
+.env\Scripts\activate
 pip install -r requirements.txt
 ```
 ---
