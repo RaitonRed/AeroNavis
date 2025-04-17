@@ -1,6 +1,6 @@
 import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Input
+from keras.models import Sequential
+from keras.layers import Dense, Input
 import numpy as np
 
 # مشخصات ورودی/خروجی
