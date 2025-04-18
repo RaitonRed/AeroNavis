@@ -24,7 +24,6 @@ def load_dataframe(path="./data/generated_data.csv"):
         print(f"[✗] Unexpected error while loading dataframe: {e}")
         return None
 
-
 def load_processed_features_and_labels(path="./data/processed_data.csv"):
     """ لود فیچرها و لیبل‌ها برای آموزش مدل """
     try:
@@ -48,7 +47,6 @@ def load_processed_features_and_labels(path="./data/processed_data.csv"):
     except Exception as e:
         print(f"[✗] Unexpected error while loading features and labels: {e}")
         return None, None
-
 
 if __name__ == '__main__':
     # تست سریع
