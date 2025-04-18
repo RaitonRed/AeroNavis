@@ -1,14 +1,14 @@
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 import os
-from utils.data_loader import load_data
+from data_loader import load_dataframe
 
 RAW_PATH = './data/generated_data.csv'
 PROCESSED_PATH = './data/processed_data.csv'
 
 def preprocess_and_label(input_path=RAW_PATH, output_path=PROCESSED_PATH):
     """ داده‌های خام را پیش‌پردازش کرده و برچسب بزند """
-    df = load_data(input_path)
+    df = load_dataframe(input_path)
 
     # ساخت برچسب‌ها: مختصات گام بعدی
     df['Latitude_next'] = df['Latitude'].shift(-1)
