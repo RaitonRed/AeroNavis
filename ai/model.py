@@ -27,4 +27,4 @@ y_train = np.random.rand(5000, OUTPUT_SIZE) * 2 - 1
 model.fit(X_train, y_train, epochs=30, batch_size=32)
 
 # ذخیره مدل
-model.save("ai/saved_model/gps_nav_model")
+model.save("./models/base")
