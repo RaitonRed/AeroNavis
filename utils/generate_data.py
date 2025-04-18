@@ -1,50 +1,44 @@
-import numpy as np
 import pandas as pd
-import random
-import os
+import numpy as np
 
-DATA_PATH = './data/generated_data.csv'
-NUM_SAMPLES = 200
+# مشخصات ویژگی‌ها
+FEATURE_COLUMNS = [
+    'Latitude', 'Longitude', 'Altitude',
+    'Speed', 'Direction',
+    'Accel_X', 'Accel_Y', 'Accel_Z'
+]
 
-def generate_random_data(num_samples):
-    data = []
+def generate_dataset(num_samples=100):
+    # داده‌های تصادفی برای ویژگی‌ها
+    latitude = np.random.uniform(-90, 90, num_samples)  # Latitude
+    longitude = np.random.uniform(-180, 180, num_samples)  # Longitude
+    altitude = np.random.uniform(0, 5000, num_samples)  # Altitude
+    speed = np.random.uniform(0, 150, num_samples)  # Speed
+    direction = np.random.uniform(0, 360, num_samples)  # Direction
+    accel_x = np.random.uniform(-10, 10, num_samples)  # Acceleration in X
+    accel_y = np.random.uniform(-10, 10, num_samples)  # Acceleration in Y
+    accel_z = np.random.uniform(-10, 10, num_samples)  # Acceleration in Z
 
-    for _ in range(num_samples):
-        # GPS data
-        latitude = random.uniform(-90.0, 90.0)
-        longitude = random.uniform(-180.0, 180.0)
-        altitude = random.uniform(0, 500)  # متر
+    # ساخت دیتافریم
+    df = pd.DataFrame({
+        'Latitude': latitude,
+        'Longitude': longitude,
+        'Altitude': altitude,
+        'Speed': speed,
+        'Direction': direction,
+        'Accel_X': accel_x,
+        'Accel_Y': accel_y,
+        'Accel_Z': accel_z
+    })
 
-        # Movement info
-        speed = random.uniform(0, 100)  # km/h
-        direction = random.uniform(0, 360)  # degrees
+    # محاسبه delta_yaw، delta_pitch و delta_thrust (تغییرات)
+    df['delta_yaw'] = np.gradient(df['Direction'])
+    df['delta_pitch'] = np.gradient(df['Altitude'])  # تغییرات در ارتفاع (نمونه)
+    df['delta_thrust'] = np.gradient(df['Speed'])   # تغییرات در سرعت (نمونه)
 
-        # Accelerometer data (m/s²)
-        accel_x = random.uniform(-5.0, 5.0)
-        accel_y = random.uniform(-5.0, 5.0)
-        accel_z = random.uniform(-10.0, 10.0)  # چون g=9.8
-
-        data.append([
-            latitude, longitude, altitude,
-            speed, direction,
-            accel_x, accel_y, accel_z
-        ])
-
-    return data
-
-def save_data_to_csv(data):
-    columns = [
-        'Latitude', 'Longitude', 'Altitude',
-        'Speed', 'Direction',
-        'Accel_X', 'Accel_Y', 'Accel_Z'
-    ]
-    df = pd.DataFrame(data, columns=columns)
-    df.to_csv(DATA_PATH, index=False)
-    print(f"[✓] Data saved to {DATA_PATH}")
-
-def main():
-    data = generate_random_data(NUM_SAMPLES)
-    save_data_to_csv(data)
+    # ذخیره داده‌ها
+    df.to_csv('./data/generated_data.csv', index=False)
+    print(f"[✓] Generated {num_samples} samples and saved to './data/generated_data.csv'")
 
 if __name__ == '__main__':
-    main()
+    generate_dataset()
