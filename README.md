@@ -22,8 +22,14 @@ AeroNavis/
 |   └── model.py
 ├── simulator/
 ├── utils/
-|   └── generate_data.py
+|    ├── __pycache__
+|    ├── __init__.py
+|    ├── data_loader.py
+|    ├── generate_data.py
+|    └── preproccess.py
 ├── data/
+|    ├── generated_data.csv
+|    └── preprocessed_data.csv
 ├── models/
 ├── configs/
 ├── notebooks/
