@@ -1,12 +1,21 @@
 import pandas as pd
 import numpy as np
 
+FEATURE_COLUMNS = [
+    'Latitude', 'Longitude', 'Altitude',
+    'Speed', 'Direction',
+    'Accel_X', 'Accel_Y', 'Accel_Z'
+]
+
 def load_processed_data(path='./data/processed_data.csv'):
+    # فایل CSV رو بخون
     df = pd.read_csv(path)
-    X = df.values[:, :-1]  # همه‌ی ستون‌ها به جز آخری (اگه لیبل نداری، همه‌ش X میشه)
-    y = None  # اگه لیبل نداری، می‌تونی None بزاری یا بعداً اضافه‌ش کنی
-    return X, y
+
+    # فقط ستون‌های مورد نظر رو جدا کن
+    X = df[FEATURE_COLUMNS].values
+
+    return X
 
 if __name__ == '__main__':
-    X, y = load_processed_data()
-    print(f"Loaded data shape: {X.shape}")
+    X = load_processed_data()
+    print(f"[✓] Loaded data shape: {X.shape}")
