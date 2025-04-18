@@ -17,14 +17,12 @@ def build_gps_navigation_model():
     model.compile(optimizer='adam', loss='mse')
     return model
 
+# ایجاد مدل
 model = build_gps_navigation_model()
+
+# نمایش ساختار مدل
 model.summary()
 
-# داده‌های تستی مجازی (فعلاً برای آموزش اولیه)
-X_train = np.random.rand(5000, INPUT_SIZE)
-y_train = np.random.rand(5000, OUTPUT_SIZE) * 2 - 1
-
-model.fit(X_train, y_train, epochs=30, batch_size=32)
-
-# ذخیره مدل
-model.save("./models/base")
+# ذخیره مدل بدون آموزش
+model.save("./models/model")  # مدل در مسیر مشخص شده ذخیره می‌شود
+print("[✓] Model saved successfully.")
