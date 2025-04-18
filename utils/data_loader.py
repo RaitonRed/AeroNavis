@@ -8,14 +8,31 @@ FEATURE_COLUMNS = [
 ]
 
 def load_processed_data(path='./data/processed_data.csv'):
-    # فایل CSV رو بخون
-    df = pd.read_csv(path)
+    try:
+        # فایل CSV رو بخون
+        df = pd.read_csv(path)
 
-    # فقط ستون‌های مورد نظر رو جدا کن
-    X = df[FEATURE_COLUMNS].values
+        # چک کنیم که آیا ستون‌ها موجود هستند یا خیر
+        missing_columns = [col for col in FEATURE_COLUMNS if col not in df.columns]
+        if missing_columns:
+            raise ValueError(f"Missing columns in the dataset: {', '.join(missing_columns)}")
 
-    return X
+        # فقط ستون‌های مورد نظر رو جدا کن
+        X = df[FEATURE_COLUMNS].values
+        print(f"[✓] Data loaded successfully. Shape: {X.shape}")
+        return X
+    
+    except FileNotFoundError:
+        print(f"[✗] Error: The file at {path} was not found.")
+        return None
+    except ValueError as e:
+        print(f"[✗] {e}")
+        return None
+    except Exception as e:
+        print(f"[✗] Unexpected error: {e}")
+        return None
 
 if __name__ == '__main__':
     X = load_processed_data()
-    print(f"[✓] Loaded data shape: {X.shape}")
+    if X is not None:
+        print(f"[✓] Loaded data shape: {X.shape}")
