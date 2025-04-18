@@ -4,10 +4,10 @@ from keras.layers import Dense, Input
 import numpy as np
 
 # مشخصات ورودی/خروجی
-INPUT_SIZE = 12  # GPS فعلی + GPS هدف + سرعت + جهت
+INPUT_SIZE = 8  # GPS فعلی + GPS هدف + سرعت + جهت
 OUTPUT_SIZE = 3  # delta_yaw, delta_pitch, delta_thrust
 
-def build_gps_navigation_model():
+def build_navigation_model():
     model = Sequential([
         Input(shape=(INPUT_SIZE,)),
         Dense(128, activation='relu'),
@@ -18,7 +18,7 @@ def build_gps_navigation_model():
     return model
 
 # ایجاد مدل
-model = build_gps_navigation_model()
+model = build_navigation_model()
 
 # نمایش ساختار مدل
 model.summary()
