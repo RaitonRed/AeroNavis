@@ -4,7 +4,7 @@ import random
 import os
 
 DATA_PATH = './data/generated_data.csv'
-NUM_SAMPLES = 100
+NUM_SAMPLES = 200
 
 def generate_random_data(num_samples):
     data = []
